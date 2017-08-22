@@ -51,7 +51,7 @@ class Shicli
     number.to_i.times do |x|
       object[:packages] << {
         "reference": "#{x}",
-        "full_name": "NATALIA OYARZO #{number}",
+        "full_name": "test-#{number}",
         "email": "emailvalido@gmail.com",
         "items_count": 1,
         "cellphone": "+99999999",
