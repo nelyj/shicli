@@ -2,5 +2,4 @@
 
 To send test package to shipit use this example:
 
-`cd shicli`
-`cd ./shicli help`
+`cd shicli && bundle && ./shicli help`
