@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+require './shicli.rb'
+
+method=ARGV[0].to_s
+params=ARGV[1].to_s
+params2=ARGV[2].to_s
+params3=ARGV[3].to_s
+option = "--"
+
+if method.include?(option)
+  method = method.sub(option,'')
+  Shicli.send("#{method}", params, params2, params3)
+elsif method.empty?
+  puts "Must need to pass parameters for execute methods"
+elsif method == "help"
+  availables = <<-eos
+   Availables methods:
+
+   - by_request: Send one request to API server
+     Example:
+     ./shicli --by_request 1 TOKEN EMAIL
+
+   - massive_request: Massive objects in the same request to API server
+     Example:
+    ./shicli --massive_request 10 TOKEN EMAIL
+
+  eos
+  puts availables
+else
+  puts "Undefined method for: #{method}"
+end
