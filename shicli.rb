@@ -1,10 +1,15 @@
 require 'bundler'
 require 'json'
 require 'pry'
+require 'colorize'
 
 Bundler.require
 
 class Shicli
+
+  def self.find(id,token=nil,email=nil)
+    new(token, email).find(id)
+  end
 
   def self.massive_request(number=1, token=nil,email=nil)
     new(token, email).massive_request(number)
@@ -19,7 +24,7 @@ class Shicli
     object = {
       "packages": [
         {
-          "reference": "test-123456",
+          "reference": "test-api1",
           "full_name": "Matias doren",
           "email": "email@valido.com",
           "items_count": 1,
@@ -41,7 +46,6 @@ class Shicli
 
   end
 
-
   def self.massive_to_json(number=0)
     object = {
        "packages": [
@@ -50,8 +54,8 @@ class Shicli
 
     number.to_i.times do |x|
       object[:packages] << {
-        "reference": "#{x}",
-        "full_name": "test-#{number}",
+        "reference": "xsn#{number}",
+        "full_name": "xsn#{number}",
         "email": "emailvalido@gmail.com",
         "items_count": 1,
         "cellphone": "+99999999",
@@ -66,10 +70,10 @@ class Shicli
       "height": "30",
       "weight": "1",
         "address_attributes": {
-          "commune_id": 435,
-          "street": "LOS RIOS",
-          "number": "1231231",
-          "complement": "ALTO EL MANZANO"
+          "commune_id": 317,
+          "street": "Av providencia",
+          "number": "101",
+          "complement": "oficina 10"
         }
       }
     end
@@ -80,6 +84,11 @@ class Shicli
   def initialize(token,email)
     @base = "http://api.shipit.cl/v"
     @headers = { 'Accept': 'application/vnd.shipit.v2', 'X-Shipit-Email': email, 'X-Shipit-Access-Token': token }
+  end
+
+  def find(id)
+    response = RestClient.get("#{@base}/packages/#{id}", @headers)
+    puts JSON.parse(response.body)
   end
 
   def massive_request(number)

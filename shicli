@@ -20,6 +20,10 @@ elsif method == "help"
      Example:
      ./shicli --by_request 1 TOKEN EMAIL
 
+  - find: Search by package id
+    Example:
+    ./shicli --find 213123 TOKEN EMAIL
+
    - massive_request: Massive objects in the same request to API server
      Example:
     ./shicli --massive_request 10 TOKEN EMAIL
